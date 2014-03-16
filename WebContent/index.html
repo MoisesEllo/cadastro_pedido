@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<title> Cadastro de Pedidos - AV2 Java IV </title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js" ></script>
+		<script type="text/javascript" src="index.js" ></script>
+		<style type="text/css">
+			label
+			{
+				width: 100px;
+				display: inline-block;
+				text-align: left;
+			}
+			
+			input, select
+			{
+				width: 150px;
+			}
+			
+			table, tr, td
+			{
+				border-width: 1px;
+				border-style: solid;
+				border-collapse:collapse;
+				padding: 5px;
+			}
+			
+			#txtQuantidade
+			{
+				width: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<form id="frmCadasgroPedido">
+			<label for="txtNomeCliente">Cliente</label> <input type="text" id="txtNomeCliente" value="" />
+			<br />
+			<label for="ddlItemPedido">Item Pedido</label> 
+			<select id="ddlItemPedido">
+				<option value=""> --- </option>
+			</select>
+			
+			<label for="male">Quantidade</label> 
+			<input type="number" id="txtQuantidade" value="" />
+			
+			<input type="button" id="btnAdicionarItem" value="Adicionar Item" />
+			
+			<br />
+			<br />
+			
+			<table id="tblItemsPedido">
+				<thead>
+					<tr>
+						<td>Item Pedido</td>
+						<td>Quantidade</td>
+						<td>Op&ccedil;oes</td>
+					</tr>
+				</thead>
+				<tfoot>
+				</tfoot>				
+				<tbody>
+				</tbody>
+			</table>
+			
+			<br />
+			
+			<input type="button" id="btnEnviarPedido" value="Enviar Pedido" />
+			
+		</form>
+	</body>
+</html>
