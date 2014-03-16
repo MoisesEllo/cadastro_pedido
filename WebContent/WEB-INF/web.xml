@@ -4,4 +4,9 @@
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
+  
+  <servlet>
+	  <servlet-name>CadastroPedidoServlet</servlet-name>
+	  <servlet-class>com.cadastropedido.web.CadastroPedidoServlet</servlet-class>
+  </servlet>
 </web-app>

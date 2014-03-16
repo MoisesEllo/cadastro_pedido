@@ -8,9 +8,12 @@ USE `cadastropedido` ;
 -- -----------------------------------------------------
 -- Table `cadastropedido`.`pedido`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `cadastropedido`.`pedido` ;
+
 CREATE TABLE IF NOT EXISTS `cadastropedido`.`pedido` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `data` DATETIME NULL,
+  `nome_cliente` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -18,6 +21,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `cadastropedido`.`tipo_item`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `cadastropedido`.`tipo_item` ;
+
 CREATE TABLE IF NOT EXISTS `cadastropedido`.`tipo_item` (
   `id` INT NOT NULL,
   `nome` VARCHAR(45) NOT NULL,
@@ -28,6 +33,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `cadastropedido`.`item`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `cadastropedido`.`item` ;
+
 CREATE TABLE IF NOT EXISTS `cadastropedido`.`item` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
@@ -46,6 +53,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `cadastropedido`.`item_pedido`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `cadastropedido`.`item_pedido` ;
+
 CREATE TABLE IF NOT EXISTS `cadastropedido`.`item_pedido` (
   `id_pedido` INT NOT NULL,
   `id_item` INT NOT NULL,
