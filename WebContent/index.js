@@ -9,24 +9,37 @@ $(document).ready(function() {
 
 function obterProdutos()
 {
-	var items = [
-		{id: 1, nome: 'teste 1'},
-		{id: 2, nome: 'teste 2'},
-		{id: 3, nome: 'teste 3'},
-		{id: 4, nome: 'teste 4'},
-	];
+	$.post( "CadastroPedidoServlet", { acao:"OBTER_ITEMS" }, function( responseObj ) {
 
-	for(var key in items) {
-		$("#ddlItemPedido").append($('<option></option>').val(items[key].id).html(items[key].nome));
-	}
+		if(responseObj.mensagemErro)
+		{
+			alert(responseObj.mensagemErro);
+		}
+		else
+		{
+			var items = jQuery.parseJSON(responseObj.resposta);
+
+			for(var key in items) {
+				$("#ddlItemPedido").append($('<option></option>').val(items[key].id).html(items[key].nome));
+			}
+		}
+	},"json");
 }
 
 function adicionarItem()
 {
+
+	var quantidade = $("#txtQuantidade").val();
+	
+	if(quantidade == "")
+	{
+		quantidade = null;
+	}
+
 	var item = {
 		id : $("#ddlItemPedido").val(),
 		nome : $("#ddlItemPedido option:selected").text(),
-		quantidade : $("#txtQuantidade").val()
+		quantidade : quantidade
 	};
 	
 	$.items[item.id] = item;
@@ -42,15 +55,15 @@ function carregaTabelaPedidos()
 	{
 		var linha = document.createElement("tr");
 		
-		adicionaColunaTexto(linha, $.items[key].nome); // Coluna item
-		adicionaColunaTexto(linha, $.items[key].quantidade); // Coluna quantidade
-		adicionaColunaTexto(linha, "<a href='#' onclick='javascript:excluirItemPedido("+ key +")'>Excluir</a>"); // Coluna opcoes
+		adicionaColuna(linha, $.items[key].nome); // Coluna item
+		adicionaColuna(linha, $.items[key].quantidade); // Coluna quantidade
+		adicionaColuna(linha, "<a href='#' onclick='javascript:excluirItemPedido("+ key +")'>Excluir</a>"); // Coluna opcoes
 		
 		$('#tblItemsPedido > tbody:last').append(linha);
 	}
 }
 
-function adicionaColunaTexto(linha, valor)
+function adicionaColuna(linha, valor)
 {
 	var coluna = document.createElement("td");
 	$(coluna).append(valor);
@@ -59,14 +72,23 @@ function adicionaColunaTexto(linha, valor)
 
 function enviarPedido()
 {
-	var pedido = {
-		cliente: $("#txtNomeCliente").val(),
-		items: $.items
-	};
+	var nomeCliente = $("#txtNomeCliente").val();
 	
-	limparFormulario();
+	console.log({ acao:"SALVAR_PEDIDO", cliente: nomeCliente, items: JSON.stringify($.items) });
 	
-	alert('Pedido enviado com sucesso !');
+	$.post( "CadastroPedidoServlet", { acao:"SALVAR_PEDIDO", cliente: nomeCliente, items: JSON.stringify($.items) }, function( responseObj ) {
+
+		if(responseObj.mensagemErro)
+		{
+			alert(responseObj.mensagemErro);
+		}
+		else
+		{
+			limparFormulario();
+	
+			alert('Pedido enviado com sucesso !');
+		}
+	},"json");
 }
 
 function limparFormulario()
@@ -79,7 +101,7 @@ function limparFormulario()
 
 function excluirItemPedido(id)
 {
-	$.items.splice(id,1);
+	$.items.splice(id, 1);
 	
 	carregaTabelaPedidos();
 }

@@ -2,7 +2,7 @@ package com.cadastropedido.web;
 
 public class ItemPedidoTela {
 	private int id;
-	private double quantidade;
+	private Double quantidade;
 	private String nome;
 	
 	public int getId() {
@@ -13,11 +13,11 @@ public class ItemPedidoTela {
 		this.id = idItem;
 	}
 	
-	public double getQuantidade() {
+	public Double getQuantidade() {
 		return quantidade;
 	}
 	
-	public void setQuantidade(double quantidade) {
+	public void setQuantidade(Double quantidade) {
 		this.quantidade = quantidade;
 	}
 	

@@ -12,7 +12,7 @@ public class ItemPedido implements Serializable{
 	private ItemPedidoPK itemPedidoPK;
 
 	@Column(name = "quantidade", nullable = true)
-	private double quantidade;
+	private Double quantidade;
 	
 	public ItemPedido() {
 		itemPedidoPK = new ItemPedidoPK();
@@ -38,7 +38,7 @@ public class ItemPedido implements Serializable{
 		return quantidade;
 	}
 	
-	public void setQuantidade(double quantidade) {
+	public void setQuantidade(Double quantidade) {
 		this.quantidade = quantidade;
 	}
 	

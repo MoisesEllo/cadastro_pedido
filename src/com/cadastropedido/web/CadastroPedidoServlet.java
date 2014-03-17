@@ -101,7 +101,9 @@ public class CadastroPedidoServlet extends HttpServlet {
 						throw new RuntimeException("Parametro 'cliente' incorreto");
 					}
 					
-					ItemPedidoTela[] itemsTela = null;				
+					ItemPedidoTela[] itemsTela = null;	
+					
+					System.out.println(request.getParameter("items"));
 					
 					try 
 					{
@@ -119,16 +121,19 @@ public class CadastroPedidoServlet extends HttpServlet {
 					
 					for (ItemPedidoTela itemTela : itemsTela) {
 						
-						itemPedido = new ItemPedido();
-						
-						item = new Item();
-						item.setId(itemTela.getId());
-						item.setNome(itemTela.getNome());
-						itemPedido.setItem(item);
-						
-						itemPedido.setQuantidade(itemTela.getQuantidade());
-						
-						itemsPedido.add(itemPedido);
+						if(itemTela != null)
+						{
+							itemPedido = new ItemPedido();
+							
+							item = new Item();
+							item.setId(itemTela.getId());
+							item.setNome(itemTela.getNome());
+							itemPedido.setItem(item);
+							
+							itemPedido.setQuantidade(itemTela.getQuantidade());
+							
+							itemsPedido.add(itemPedido);
+						}
 					}
 					
 					Pedido pedido = servico.salvarPedido(nomeCliente, itemsPedido);
