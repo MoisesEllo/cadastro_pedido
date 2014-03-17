@@ -1,10 +1,25 @@
 package com.cadastropedido.modelo;
 
-public class Item {
+import java.io.Serializable;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="item")
+public class Item implements Serializable{
 	
+	@Id
+	@GeneratedValue
 	private int id;
+	
+	@Column(name = "nome", nullable = false)
 	private String nome;
+	
+	@Column(name = "descricao", nullable = true)
 	private String descricao;
+	
+	@ManyToOne
+	@JoinColumn(name="id_tipo_item")
 	private TipoItem tipo;
 	
 	public int getId() {

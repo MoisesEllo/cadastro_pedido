@@ -3,8 +3,6 @@ package com.cadastropedido.servico;
 import java.util.Calendar;
 import java.util.List;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import com.cadastropedido.banco.ItemBanco;
 import com.cadastropedido.banco.ItemPedidoBanco;
 import com.cadastropedido.modelo.Item;

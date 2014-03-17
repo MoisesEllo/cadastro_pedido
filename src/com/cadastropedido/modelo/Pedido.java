@@ -1,13 +1,22 @@
 package com.cadastropedido.modelo;
 
+import java.io.Serializable;
 import java.util.Calendar;
-import java.util.LinkedList;
-import java.util.List;
 
-public class Pedido {
+import javax.persistence.*;
+
+@Entity
+@Table(name="pedido")
+public class Pedido  implements Serializable{
 	
+	@Id
+	@GeneratedValue
 	private int id;
+	
+	@Column(name = "data", nullable = false)
 	private Calendar data;
+	
+	@Column(name = "nome_cliente", nullable = false)
 	private String nomeCliente;
 	
 	public Pedido() {

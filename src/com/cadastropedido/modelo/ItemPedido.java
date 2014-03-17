@@ -1,25 +1,37 @@
 package com.cadastropedido.modelo;
 
-public class ItemPedido {
+import java.io.Serializable;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="item_pedido")
+public class ItemPedido implements Serializable{
 	
-	private Pedido pedido;
-	private Item item;
+	@EmbeddedId
+	private ItemPedidoPK itemPedidoPK;
+
+	@Column(name = "quantidade", nullable = true)
 	private double quantidade;
 	
+	public ItemPedido() {
+		itemPedidoPK = new ItemPedidoPK();
+	}
+	
 	public Pedido getPedido() {
-		return pedido;
+		return itemPedidoPK.getPedido();
 	}
 	
 	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
+		itemPedidoPK.setPedido(pedido);
 	}
 	
 	public Item getItem() {
-		return item;
+		return itemPedidoPK.getItem();
 	}
 	
 	public void setItem(Item item) {
-		this.item = item;
+		this.itemPedidoPK.setItem(item);
 	}
 	
 	public double getQuantidade() {
@@ -28,5 +40,13 @@ public class ItemPedido {
 	
 	public void setQuantidade(double quantidade) {
 		this.quantidade = quantidade;
+	}
+	
+	public ItemPedidoPK getItemPedidoPK() {
+		return itemPedidoPK;
+	}
+
+	public void setItemPedidoPK(ItemPedidoPK itemPedidoPK) {
+		this.itemPedidoPK = itemPedidoPK;
 	}
 }
